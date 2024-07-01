@@ -45,7 +45,6 @@ export class AppComponent implements OnInit {
   }
 
   loadTemplate(book: BookModel) {
-    if (this.editBook === null) return this.readOnlyTemplate;
     if (this.editedBook && this.editedBook.id === book.id) {
       return this.editTemplate;
     } else {
