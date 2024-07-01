@@ -1,0 +1,34 @@
+
+
+<h1>Библиотека</h1>
+<button (click)="addBook()">Добавить</button>
+<table>
+    <tr *ngFor="let book of books">
+        <ng-template [ngTemplateOutlet]="loadTemplate(book)" [ngTemplateOutletContext]="{ $implicit: book}">
+        </ng-template>
+    </tr>
+</table>
+<div>{{statusMessage}}</div>
+ 
+<ng-template #readOnlyTemplate let-book>
+    <td>{{book.id}}</td>
+    <td>{{book.name}}</td>
+    <td>
+        <button (click)="editBook(book)">Изменить</button>
+        <button (click)="deleteBook(book)">Удалить</button>
+    </td>
+</ng-template>
+
+<ng-template #editTemplate>
+    <td>
+        <input [(ngModel)]="editedBook.id" readonly disabled />
+    </td>
+    <td>
+        <input [(ngModel)]="editedBook.name" />
+    </td>
+    <td>
+        <button (click)="saveBook()">Сохранить</button>
+        <button (click)="cancel()">Отмена</button>
+    </td>
+</ng-template>
+

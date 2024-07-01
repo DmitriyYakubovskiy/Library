@@ -1,0 +1,6 @@
+@AngularLibrary.Server_HostAddress = http://localhost:5246
+
+GET {{AngularLibrary.Server_HostAddress}}/books/
+Accept: application/json
+
+###

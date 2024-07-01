@@ -1,0 +1,33 @@
+﻿@model BookModel
+<form>
+    <div class="mb-3">
+        <img class="img-thumbnail" width="300" src="https://catherineasquithgallery.com/uploads/posts/2021-02/1614532683_2-p-kniga-na-belom-fone-2.png" alt="@Model.Name" />
+    </div>
+    <div class="row">
+        <div class="col-sm-4">Название книги:</div>
+        <div class="col-sm-4">
+            <label class="form-label">@Model.Name</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">Издатель:</div>
+        <div class="col-sm-4">
+            <label class="form-label">@Model.Publisher.Name</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">Автор:</div>
+        <div class="col-sm-4">
+            <label class="form-label">@Model.Author.FullName</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">Год:</div>
+        <div class="col-sm-4">
+            <label class="form-label">@Model.Year</label>
+        </div>
+    </div>
+    <p>
+        <a class="btn btn-warning" href="/">На главную</a>
+    </p>
+</form>

@@ -1,0 +1,42 @@
+﻿@model BookModel[]
+<h2 class="display-2">Библиотека всеx книг</h2>
+<div class="row mt-5 mb-2">
+    @{
+        foreach(var book in Model)
+        {
+            <div class="col-lg-4">
+                <img class="img-thumbnail" width="300" src="https://catherineasquithgallery.com/uploads/posts/2021-02/1614532683_2-p-kniga-na-belom-fone-2.png" alt="@book.Name" />
+                <h2>Название книги: @book.Name</h2>
+                <p>Издатель: @book.Publisher.Name</p>
+                <p>Жанр: @book.Genre</p>
+                <a asp-controller="Books" asp-action="GetById" asp-route-id="@book.Id" class="btn btn-sm btn-warning">Подробнее</a>
+                <a asp-controller="Books" asp-action="Edit" asp-route-id="@book.Id" class="btn btn-sm btn-warning"> Изменить</a>
+                <a id="delete-btn" class="btn btn-sm btn-danger" onclick="confirmDeleteBook(@book.Id)">Удалить</a>
+            </div>
+        }
+    }
+</div>
+<a asp-controller="Books" asp-action="Create" class="btn btn-primary">Создать</a>
+
+<script type="text/javascript">
+    document.getElementById("delete-btn").addEventListener("click", deleteBook);
+
+    async function confirmDeleteBook(id) {
+        if (confirm('Вы уверены, что хотите удалить книгу?')) {
+            await deleteBook(id);
+        }
+    }
+
+    async function deleteBook(id) {
+        try  {
+            await fetch(`/books/` + id, {
+                method: "DELETE",
+                headers: { "Accept": "application/json", "Content-Type": "application/json" }
+            });
+            window.location.href = '/';
+        } catch (error) {
+            console.log(error);
+            alert('Произошла ошибка при удалении');
+        }
+    }
+</script>
