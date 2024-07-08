@@ -16,10 +16,12 @@ export class BookService {
     const myHeaders = new HttpHeaders().set("Content-Type", "application/json");
     return this.http.post<BookModel>(this.url, JSON.stringify(book), { headers: myHeaders });
   }
+
   updateBook(book: BookModel) {
     const myHeaders = new HttpHeaders().set("Content-Type", "application/json");
     return this.http.put<BookModel>(this.url, JSON.stringify(book), { headers: myHeaders });
   }
+
   deleteBook(id: number) {
 
     return this.http.delete<BookModel>(this.url + "/" + id);

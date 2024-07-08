@@ -23,19 +23,19 @@ public class BooksController : Controller
     [HttpGet("{id:int}")]
     public IActionResult GetById([FromRoute] int id)
     {
-        var product = booksService.GetById(id);
-        if (product == null)
+        var book = booksService.GetById(id);
+        if (book == null)
         {
             return NotFound(id);
         }
-        return Ok(product);
+        return Ok(book);
     }
 
     [HttpPost]
-    public IActionResult Create([FromBody] BookModel bookModel)
+    public Task Create([FromBody] BookModel bookModel)
     {
         booksService.Create(bookModel);
-        return Ok();
+        return Task.FromResult(Ok());
     }
 
     [HttpPut]
@@ -51,5 +51,4 @@ public class BooksController : Controller
         booksService.Delete(id);
         return Ok();
     }
-
 }

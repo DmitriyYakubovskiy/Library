@@ -7,6 +7,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './root-app/app.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
+import { PublisherService } from './publishers/publisher.service';
+import { AuthorService } from './authors/author.service';
 import { BookService } from './books/book.service';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { NgIf, NgTemplateOutlet} from '@angular/common';
@@ -30,7 +32,7 @@ const appRoutes: Routes = [
     AppComponent,
     NotFoundComponent,
   ],
-  providers: [BookService, provideAnimationsAsync()], // регистрация сервисов
+  providers: [ BookService, AuthorService, PublisherService ,provideAnimationsAsync()], // регистрация сервисов
   bootstrap: [AppComponent],
 })
 export class AppModule {}

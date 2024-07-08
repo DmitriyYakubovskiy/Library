@@ -2,12 +2,14 @@
 
 <h1>Библиотека</h1>
 <button (click)="addBook()">Добавить</button>
-    <tr>
-        <th>Id</th>
-        <th>Имя</th>
-        <th>Возраст</th>
-        <th></th>
-    </tr>
+<tr>
+    <th>Id</th>
+    <th>Имя</th>
+    <th>Жанр</th>
+    <th>Издатель</th>
+    <th>Автор</th>
+    <th></th>
+</tr>
 <table>
     <tr *ngFor="let book of books">
         <ng-template [ngTemplateOutlet]="loadTemplate(book)" [ngTemplateOutletContext]="{ $implicit: book}">
@@ -15,10 +17,13 @@
     </tr>
 </table>
 <div>{{statusMessage}}</div>
- 
+
 <ng-template #readOnlyTemplate let-book>
     <td>{{book.id}}</td>
     <td>{{book.name}}</td>
+    <td>{{book.genre}}</td>
+    <td>{{book.author.fullName}}</td>
+    <td>{{book.publisher.name}}</td>
     <td>
         <button (click)="editBook(book)">Изменить</button>
         <button (click)="deleteBook(book)">Удалить</button>
@@ -32,6 +37,19 @@
     <td>
         <input [(ngModel)]="editedBook.name" />
     </td>
+    <td>
+        <input [(ngModel)]="editedBook.genre" />
+    </td>
+    <select [(ngModel)]="editedBook.author">
+        <option *ngFor="let author of authors" [value]="author">
+            {{ author.fullName }}
+        </option>
+    </select>
+    <select [(ngModel)]="editedBook.publisher">
+        <option *ngFor="let publisher of publishers" [value]="publisher">
+            {{ publisher.name }}
+        </option>
+    </select>
     <td>
         <button (click)="saveBook()">Сохранить</button>
         <button (click)="cancel()">Отмена</button>

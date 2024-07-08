@@ -27,7 +27,9 @@ public class Startup
         services.AddScoped<IPublisherRepository, PublisherRepository>();
         services.AddScoped<IBookRepository, BookRepository>();
 
-        services.AddScoped<IBooksService, BooksService>();
+        services.AddScoped<IBooksService, BooksService>()
+            .AddScoped<IAuthorsService, AuthorsService>()
+            .AddScoped<IPublishersService, PublishersService>();
         services.AddMvc();
         services.AddControllers();
 

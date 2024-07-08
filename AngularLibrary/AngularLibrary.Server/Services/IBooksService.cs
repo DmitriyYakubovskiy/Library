@@ -3,11 +3,11 @@
 namespace AngularLibrary.Server.Services;
 public interface IBooksService
 {
-    BookModel[] GetAll();
-    BookModel GetById(int id);
-    AuthorModel[] GetAuthors();
-    PublisherModel[] GetPublisher();
-    void Create(BookModel model);
-    void Update(BookModel model);
-    void Delete(int id);
+    public BookModel[] GetAll();
+    public BookModel GetById(int id);
+    public AuthorModel[] GetAuthors();
+    public PublisherModel[] GetPublisher();
+    public void Create(BookModel model);
+    public void Update(BookModel model);
+    public void Delete(int id);
 }
