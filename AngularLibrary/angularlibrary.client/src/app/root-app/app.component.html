@@ -1,31 +1,37 @@
-
+<link rel="stylesheet" href="app.component.css">
 
 <h1>Библиотека</h1>
-<button (click)="addBook()">Добавить</button>
-<tr>
-    <th>Id</th>
-    <th>Имя</th>
-    <th>Жанр</th>
-    <th>Издатель</th>
-    <th>Автор</th>
-    <th></th>
-</tr>
 <table>
+    <tr>
+        <th>Id</th>
+        <th>Имя</th>
+        <th>Жанр</th>
+        <th>Год издания</th>
+        <th>Издатель</th>
+        <th>Автор</th>
+        <th></th>
+        <th></th>
+    </tr>
+
     <tr *ngFor="let book of books">
         <ng-template [ngTemplateOutlet]="loadTemplate(book)" [ngTemplateOutletContext]="{ $implicit: book}">
         </ng-template>
     </tr>
 </table>
+<button (click)="addBook()">Добавить</button>
 <div>{{statusMessage}}</div>
 
 <ng-template #readOnlyTemplate let-book>
     <td>{{book.id}}</td>
     <td>{{book.name}}</td>
     <td>{{book.genre}}</td>
+    <td>{{book.year}}</td>
     <td>{{book.author.fullName}}</td>
     <td>{{book.publisher.name}}</td>
     <td>
         <button (click)="editBook(book)">Изменить</button>
+    </td>
+    <td>
         <button (click)="deleteBook(book)">Удалить</button>
     </td>
 </ng-template>
@@ -40,19 +46,31 @@
     <td>
         <input [(ngModel)]="editedBook.genre" />
     </td>
-    <select [(ngModel)]="editedBook.author">
-        <option *ngFor="let author of authors" [value]="author">
-            {{ author.fullName }}
-        </option>
-    </select>
-    <select [(ngModel)]="editedBook.publisher">
-        <option *ngFor="let publisher of publishers" [value]="publisher">
-            {{ publisher.name }}
-        </option>
-    </select>
+    <td>
+        <input [(ngModel)]="editedBook.year" />
+    </td>
+    <td>
+        <select (change)="AuthorChanged($event)">
+            <option>--Выбрать--</option>
+            <option [value]="author.id" *ngFor="let author of authors">
+                {{ author.fullName }}
+            </option>
+        </select>
+    </td>
+    <td>
+        <select (change)="PublisherChanged($event)">
+            <option>--Выбрать--</option>
+            <option [value]="publisher.id" *ngFor="let publisher of publishers">
+                {{ publisher.name }}
+            </option>
+        </select>
+    </td>
     <td>
         <button (click)="saveBook()">Сохранить</button>
+    </td>
+    <td>
         <button (click)="cancel()">Отмена</button>
     </td>
+
 </ng-template>
 

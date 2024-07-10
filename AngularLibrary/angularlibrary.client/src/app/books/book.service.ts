@@ -5,7 +5,7 @@ import { BookModel } from "./book";
 @Injectable()
 export class BookService {
 
-  private url = 'http://localhost:5246/api/books/';
+  private url = 'http://localhost:5246/api/books';
   constructor(private http: HttpClient) { }
 
   getBooks() {
@@ -23,7 +23,6 @@ export class BookService {
   }
 
   deleteBook(id: number) {
-
     return this.http.delete<BookModel>(this.url + "/" + id);
   }
 }

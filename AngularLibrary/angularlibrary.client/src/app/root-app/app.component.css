@@ -1,14 +1,29 @@
-﻿:host {
-    max-width: 1280px;
-    padding: 2rem;
-    text-align: center;
+body {
+  background: rgb(235, 234, 234);
 }
 
-th, td {
-    padding-left: 1rem;
-    padding-right: 1rem;
+h1 {
+  text-align: left;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 27pt;
+  font-weight: normal;
 }
 
-table {
-    margin: 0 auto;
+td {
+  text-align: center;
+  margin: 3px;
+  padding: 5px;
+  border: 0.5px solid #666;
+}
+
+th {
+  margin: 3px;
+  padding: 5px;
+  border: 0.5px solid #666;
+}
+
+p {
+  margin-top: 4px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 14pt;
 }

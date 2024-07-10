@@ -3,10 +3,10 @@ import { AuthorModel } from '../authors/author';
 
 export class BookModel {
   constructor(
-    public id: number = 0,
-    public name: string = "",
-    public genre: string = "",
-    public year: number= 0,
+    public id?: number,
+    public name?: string,
+    public genre?: string,
+    public year?: number,
     public author?: AuthorModel,
     public publisher?: PublisherModel) { }
 }

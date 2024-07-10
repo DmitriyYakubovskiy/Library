@@ -24,6 +24,14 @@ export class AppComponent implements OnInit {
   isNewRecord: boolean = false;
   statusMessage: string = "";
 
+  AuthorChanged(e) {
+    this.editedBook.author = this.authors[e.target.value-1]
+  }
+
+  PublisherChanged(e) {
+    this.editedBook.publisher = this.publishers[e.target.value-1]
+  }
+
   constructor(private bookService: BookService, private authorService: AuthorService, private publisherService: PublisherService) {
     this.books = new Array<BookModel>();
     this.authors = new Array<AuthorModel>();
