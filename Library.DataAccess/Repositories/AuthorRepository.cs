@@ -4,15 +4,15 @@ using Library.DataAccess.Entities;
 namespace Library.DataAccess.Repositories;
 public class AuthorRepository : IAuthorRepository
 {
-    private readonly BooksDbContext booksDbContext;
+    private readonly LibraryDbContext libraryDbContext;
 
-    public AuthorRepository(BooksDbContext booksDbContext)
+    public AuthorRepository(LibraryDbContext booksDbContext)
     {
-        this.booksDbContext = booksDbContext;
+        this.libraryDbContext = booksDbContext;
     }
 
     public AuthorEntity[] GetAll()
     {
-        return booksDbContext.Authors.ToArray();
+        return libraryDbContext.Authors.ToArray();
     }
 }

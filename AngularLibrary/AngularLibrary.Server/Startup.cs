@@ -21,7 +21,7 @@ public class Startup
         services.AddAutoMapper(typeof(Startup).Assembly);
 
         var connectionString = configuration.GetConnectionString("BooksDbConnection");
-        services.AddDbContext<BooksDbContext>(
+        services.AddDbContext<LibraryDbContext>(
                             options => options.UseNpgsql(connectionString));
         services.AddScoped<IAuthorRepository, AuthorRepository>();
         services.AddScoped<IPublisherRepository, PublisherRepository>();

@@ -5,17 +5,17 @@ using Microsoft.EntityFrameworkCore;
 namespace Library.DataAccess.Repositories;
 public class BookRepository : IBookRepository
 {
-    private readonly BooksDbContext booksDbContext;
+    private readonly LibraryDbContext libraryDbContext;
 
-    public BookRepository(BooksDbContext booksDbContext)
+    public BookRepository(LibraryDbContext booksDbContext)
     {
-        this.booksDbContext = booksDbContext;
+        this.libraryDbContext = booksDbContext;
     }
 
     public void Create(BookEntity model)
     {
-        booksDbContext.Books.Add(model);
-        booksDbContext.SaveChanges();
+        libraryDbContext.Books.Add(model);
+        libraryDbContext.SaveChanges();
     }
 
     public void Delete(int id)
@@ -23,13 +23,13 @@ public class BookRepository : IBookRepository
         var entity = GetById(id);
         Console.WriteLine(entity.Genre);
         if (entity == null) return;
-        booksDbContext.Books.Remove(entity);
-        booksDbContext.SaveChanges();
+        libraryDbContext.Books.Remove(entity);
+        libraryDbContext.SaveChanges();
     }
 
     public BookEntity[] GetAll()
     {
-        return booksDbContext.Books
+        return libraryDbContext.Books
                         .Include(x => x.Author)
                         .Include(x => x.Publisher)
                         .ToArray();
@@ -37,7 +37,7 @@ public class BookRepository : IBookRepository
 
     public BookEntity GetById(int id)
     {
-        return booksDbContext.Books
+        return libraryDbContext.Books
                         .Include(x => x.Author)
                         .Include(x => x.Publisher)
                         .FirstOrDefault(x => x.Id == id);
@@ -45,7 +45,7 @@ public class BookRepository : IBookRepository
 
     public void Update(BookEntity entity)
     {
-        booksDbContext.Update(entity);
-        booksDbContext.SaveChanges();
+        libraryDbContext.Update(entity);
+        libraryDbContext.SaveChanges();
     }
 }

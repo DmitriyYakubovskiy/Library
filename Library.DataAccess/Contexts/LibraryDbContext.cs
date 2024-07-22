@@ -2,15 +2,16 @@
 using Microsoft.EntityFrameworkCore;
 
 namespace Library.DataAccess.Contexts;
-public class BooksDbContext: DbContext
+public class LibraryDbContext: DbContext
 {
     public virtual DbSet<AuthorEntity> Authors { get; set; }
     public virtual DbSet<PublisherEntity> Publishers { get; set; }
     public virtual DbSet<BookEntity> Books { get; set; }
+    public virtual DbSet<UserEntity> Users { get; set; }
 
-    public BooksDbContext(DbContextOptions<BooksDbContext> options):base(options)
+    public LibraryDbContext(DbContextOptions<LibraryDbContext> options):base(options)
     {
-        //Database.EnsureCreated();
+        Database.EnsureCreated();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -60,6 +61,19 @@ public class BooksDbContext: DbContext
             entity.HasOne(d => d.Publisher).WithMany(p => p.Books).HasForeignKey(d => d.PublisherId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("books_table_publisher_id_fkey");
+        });
+
+        modelBuilder.Entity<UserEntity>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("users_table_pkey");
+
+            entity.ToTable("users_table");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e=>e.Email).HasMaxLength(100).HasColumnName("email");
+            entity.Property(e=>e.Password).HasMaxLength(100).HasColumnName("password");
+            entity.Property(e => e.Role).HasMaxLength(100).HasColumnName("role");
+            entity.Property(e => e.CreatedDate).HasColumnName("created_date");
         });
     }
 }
